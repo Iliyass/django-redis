@@ -2,26 +2,6 @@
 
 from __future__ import absolute_import, unicode_literals
 
-# Import the fastest implementation of
-# pickle package. This should be removed
-# when python3 come the unique supported
-# python version
-try:
-    import cPickle as pickle
-except ImportError:
-    import pickle
-
-import json
-import msgpack
-
-from django.core.exceptions import ImproperlyConfigured
-from django.utils.encoding import force_text
-
-try:
-    from django.utils.encoding import force_bytes
-except ImportError:
-    from django.utils.encoding import smart_bytes as force_bytes
-
 
 class BaseSerializer(object):
     def __init__(self, options):
@@ -67,3 +47,4 @@ class MSGPackSerializer(BaseSerializer):
 
     def loads(self, value):
         return msgpack.loads(value, encoding='utf-8')
+        raise NotImplementedError
